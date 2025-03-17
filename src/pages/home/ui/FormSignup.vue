@@ -1,4 +1,7 @@
 <script setup>
+import InputBase from '@/shared/ui/Inputs/InputBase.vue';
+import ButtonBase from '@/shared/ui/Buttons/ButtonBase.vue';
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useForm, Field } from 'vee-validate';
@@ -16,9 +19,10 @@ const { handleSubmit, errors } = useForm({
     }),
 });
 
+
 const onSubmit = handleSubmit((values) => {
     console.log('submit', values);
-    
+
     if (login.value === 'user') {
         router.push({ path: '/user' });
     }
@@ -31,27 +35,18 @@ const onSubmit = handleSubmit((values) => {
 <template>
     <v-form @submit.prevent="onSubmit">
         <Field name="login" v-slot="{ field, meta }">
-            <v-text-field
+            <InputBase
                 label="Введите логин"
                 v-bind="field"
                 :error-messages="errors.login"
                 rounded-md
-            ></v-text-field>
+            />
         </Field>
         <Field name="password" v-slot="{ field, meta }">
-            <v-text-field
-                label="Введите пароль"
-                v-bind="field"
-                :error-messages="errors.password"
-            ></v-text-field>
+            <InputBase label="Введите пароль" v-bind="field" :error-messages="errors.password" />
         </Field>
-        <v-btn color="primary" block class="mt-4" type="submit"> Войти </v-btn>
+        <ButtonBase block class="mt-4" text="Войти" icon="mdi-close-circle"></ButtonBase>
     </v-form>
 </template>
 
-<style lang="scss" scoped>
-.v-text-field {
-    border: none;
-}
-
-</style>
+<style lang="scss" scoped></style>

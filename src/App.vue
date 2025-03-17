@@ -8,5 +8,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/main.scss';
+@use '@/assets/scss/main.scss' as *;
 </style>
